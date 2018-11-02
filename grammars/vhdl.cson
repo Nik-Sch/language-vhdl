@@ -176,6 +176,11 @@
         'match': '--.*$\\n?'
         'name': 'comment.line.double-dash.vhdl'
       }
+      {
+        'begin': '/\\*'
+        'end': '\\*/'
+        'name': 'comment.block.vhdl'
+      }
     ]
   'component_instantiation_pattern':
     'patterns': [
@@ -429,6 +434,7 @@
     'patterns': [
       {
         'begin': '(?x)\r\n\t\t\t\t\t\t# From the beginning of the line\r\n\t\t\t\t\t\t^\\s*\r\n\r\n\t\t\t\t\t\t# The word function $1\r\n\t\t\t\t\t\t((?i:function))\\s+\r\n\r\n\t\t\t\t\t\t(\r\n\t\t\t\t\t\t\t# A valid normal identifier $3\r\n\t\t\t\t\t\t\t ([a-zA-Z][a-zA-Z\\d_]*)\r\n\t\t\t\t\t\t\t# A valid string quoted identifier $4\r\n\t\t\t\t\t\t\t|("\\S+")\n\t\t\t\t\t\t\t# A valid backslash escaped identifier $5\n\t\t\t\t\t\t\t|(\\\\.+\\\\)\r\n\t\t\t\t\t\t\t# An invalid identifier $5\r\n\t\t\t\t\t\t\t|(.+?)\r\n\t\t\t\t\t\t)\r\n\r\n\t\t\t\t\t\t# Check to make sure we have a list or we return\r\n\t\t\t\t\t\t(?=\\s*\r\n\t\t\t\t\t\t\t(\r\n\t\t\t\t\t\t\t\t \\(\r\n\t\t\t\t\t\t\t\t|(?i:\\breturn\\b)\r\n\t\t\t\t\t\t\t)\r\n\t\t\t\t\t\t)\r\n\t\t\t\t\t'
+        # 'begin': '(?x)^\s*((?i:function))\s+( ([a-zA-Z][a-zA-Z\d_]*)|("\S+")|(\\.+\\)|(.+?))(?=\s*( \(|(?i:\breturn\b)))'
         'beginCaptures':
           '1':
             'name': 'keyword.language.vhdl'
@@ -441,6 +447,7 @@
           '6':
             'name': 'invalid.illegal.invalid.identifier.vhdl'
         'end': '(?x)\r\n\t\t\t\t\t\t# From the beginning of the line\r\n\t\t\t\t\t\t^\\s*\r\n\r\n\t\t\t\t\t\t# The word end $1\r\n\t\t\t\t\t\t((?i:end))\r\n\r\n\t\t\t\t\t\t# Optional word function $3\r\n\t\t\t\t\t\t(\\s+((?i:function)))?\r\n\r\n\t\t\t\t\t\t# Optional matched identifier $6 or mismatched identifier $7\r\n\t\t\t\t\t\t(\\s+((\\3|\\4|\\5)|(.+?)))?\r\n\r\n\t\t\t\t\t\t# Ending with whitespace and semicolon\r\n\t\t\t\t\t\t(?=\\s*;)\r\n\t\t\t\t\t'
+        # 'end': '(?x)^\\s*((?i:end))(\\s+((?i:function)))?(\\s+((\\3|\\4|\\5)|(.+?)))?(?=\\s*;)'
         'endCaptures':
           '1':
             'name': 'keyword.language.vhdl'
